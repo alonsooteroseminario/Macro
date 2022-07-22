@@ -386,9 +386,9 @@
             this.groupBox2.Controls.Add(this.checkBox19);
             this.groupBox2.Controls.Add(this.checkBox21);
             this.groupBox2.Controls.Add(this.checkBox20);
-            this.groupBox2.Location = new System.Drawing.Point(212, 14);
+            this.groupBox2.Location = new System.Drawing.Point(212, 10);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(74, 387);
+            this.groupBox2.Size = new System.Drawing.Size(74, 391);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Size";

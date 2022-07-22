@@ -1,8 +1,5 @@
-﻿using Autodesk.AutoCAD.DatabaseServices;
-using Autodesk.AutoCAD.EditorInput;
-using Autodesk.AutoCAD.Runtime;
+﻿using Autodesk.AutoCAD.EditorInput;
 using System;
-using System.IO;
 using System.Windows.Forms;
 
 namespace Macro
@@ -27,7 +24,6 @@ namespace Macro
         {
             Close();
         }
-
         private void Exec()
         {
             while (res)
@@ -35,7 +31,7 @@ namespace Macro
                 Editor edt = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor;
                 PromptPointOptions ppo = new PromptPointOptions("Select the point where to place");
                 PromptPointResult ppr = edt.GetPoint(ppo);
-                if(ppr.Status == PromptStatus.Cancel)
+                if (ppr.Status == PromptStatus.Cancel)
                 {
                     res = false;
                     Show();
@@ -586,7 +582,6 @@ namespace Macro
                 checkBox16.Checked = false;
             }
         }
-
         private void btnBrowseFolder_Click(object sender, EventArgs e)
         {
             using (var fbd = new FolderBrowserDialog())
@@ -599,7 +594,6 @@ namespace Macro
                 }
             }
         }
-
         private void MainForm_Activated(object sender, EventArgs e)
         {
             string pathFile = @"C:\Users\"

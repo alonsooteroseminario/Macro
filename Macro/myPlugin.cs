@@ -1,6 +1,4 @@
-﻿// (C) Copyright 2022 by  
-//
-using Autodesk.AutoCAD.Runtime;
+﻿using Autodesk.AutoCAD.Runtime;
 
 // This line is not mandatory, but improves loading performances
 [assembly: ExtensionApplication(typeof(Macro.MyPlugin))]
@@ -12,7 +10,6 @@ namespace Macro
     // then you should remove this class.
     public class MyPlugin : IExtensionApplication
     {
-
         void IExtensionApplication.Initialize()
         {
             // Add one time initialization here
@@ -34,12 +31,10 @@ namespace Macro
 
             // Initialize your plug-in application here
         }
-
         void IExtensionApplication.Terminate()
         {
             // Do plug-in application clean up here
         }
-
     }
 
 }

@@ -5,7 +5,6 @@ using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Geometry;
 using Autodesk.AutoCAD.Runtime;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -14,122 +13,63 @@ namespace Macro
 {
     public class MyCommands
     {
-        [CommandMethod("ListLayers")]
-        public static void ListLayers()
+        [CommandMethod("Layers_Turns_Off_True")]
+        public static void Layers_Turns_Off_True()
         {
-            Document doc = Application.DocumentManager.MdiActiveDocument;
-            Database db = doc.Database;
-
-            using (Transaction trans = db.TransactionManager.StartTransaction())
-            {
-                LayerTable lyTab = trans.GetObject(db.LayerTableId, OpenMode.ForRead) as LayerTable;
-                foreach (ObjectId lyID in lyTab)
-                {
-                    LayerTableRecord lytr = trans.GetObject(lyID, OpenMode.ForRead) as LayerTableRecord;
-                    doc.Editor.WriteMessage("\nLayer name: " + lytr.Name);
-                }
-
-                // Commit the transaction
-                trans.Commit();
-            }
+            LayersForm lf = new LayersForm();
+            lf.Show();
         }
-
-        [CommandMethod("TrueLayersOff")]
-        public static void TrueLayersOff()
+        public void LAYERS(string filepath, Document doc)
         {
-            Document doc = Application.DocumentManager.MdiActiveDocument;
             Database db = doc.Database;
-
             List<string> layers = new List<string>();
-
-            //create a instance for the Excel object  
             Excel.Application oExcel = new Excel.Application();
-
-            //specify the file name where its actually exist  
-            //string filepath = @"C:\Users\BRACAdmin\Box\PM Resources\Layout Team 2022\Repos Macros\layers_to_turn_off.xlsx";
-            string filepath = @"C:\Users\" + Environment.UserName + @"\Box\PM Resources\Layout Team 2022\LAYERS_TO_TURN_OFF.xlsx";
-
-
-            //pass that to workbook object  
             Excel.Workbook WB = oExcel.Workbooks.Open(filepath);
-
-
-            // statement get the workbookname  
             string ExcelWorkbookname = WB.Name;
-
-            // statement get the worksheet count  
             int worksheetcount = WB.Worksheets.Count;
-
             Excel.Worksheet wks = WB.Worksheets[1];
-
-            // statement get the firstworksheetname  
-
             string firstworksheetname = wks.Name;
-
-            //statement get the first cell value  
-            //var firstcellvalue = ((Excel.Range)wks.Cells[1, 1]).Value;
-            //var firstcellvalue2 = ((Excel.Range)wks.Cells[2, 1]).Value;
-            //var firstcellvalue3 = ((Excel.Range)wks.Cells[3, 1]).Value;
-            //var firstcellvalue4 = ((Excel.Range)wks.Cells[4, 1]).Value;
-            //var firstcellvalue5 = ((Excel.Range)wks.Cells[5, 1]).Value;
-            //var firstcellvalue6 = ((Excel.Range)wks.Cells[6, 1]).Value;
-            //var firstcellvalue7 = ((Excel.Range)wks.Cells[7, 1]).Value;
-            //var firstcellvalue8 = ((Excel.Range)wks.Cells[8, 1]).Value;
-            //var firstcellvalue9 = ((Excel.Range)wks.Cells[9, 1]).Value;
-            //var firstcellvalue10 = ((Excel.Range)wks.Cells[10, 1]).Value;
-
-
             Excel.Range xlRange = wks.UsedRange;
-
             foreach (Excel.Range item in xlRange.Rows.Cells)
             {
                 var address = item.Address;
                 var value = item.Value;
                 layers.Add(value);
             }
-
             var layercount = layers.Count;
-
             foreach (var layer in layers)
             {
                 using (Transaction trans = db.TransactionManager.StartTransaction())
                 {
-                    try
+                    doc.LockDocument();
+                    LayerTable lyTab = trans.GetObject(db.LayerTableId, OpenMode.ForRead) as LayerTable;
+                    foreach (ObjectId lyID in lyTab)
                     {
-                        LayerTable lyTab = trans.GetObject(db.LayerTableId, OpenMode.ForRead) as LayerTable;
-                        db.Clayer = lyTab["0"];
-                        foreach (ObjectId lyID in lyTab)
+                        LayerTableRecord lytr = trans.GetObject(lyID, OpenMode.ForRead) as LayerTableRecord;
+                        if (lytr.Name == layer)
                         {
-                            LayerTableRecord lytr = trans.GetObject(lyID, OpenMode.ForRead) as LayerTableRecord;
-                            if (lytr.Name == layer)
-                            {
-                                lytr.UpgradeOpen();
-
-                                // Turn the layer ON or OFF
-                                lytr.IsOff = true;
-                                //lytr.IsOff = false;
-
-                                // Commit the transaction
-                                trans.Commit();
-                                doc.Editor.WriteMessage("\nLayer " + lytr.Name + " has been turned Off.");
-                                break;
-                            }
-                            else
-                            {
-                                doc.Editor.WriteMessage("\nLayer not found.");
-                            }
+                            lytr.UpgradeOpen();
+                            lytr.IsOff = true;
+                            trans.Commit();
+                            doc.Editor.WriteMessage("\nLayer " + lytr.Name + " has been turned Off.");
+                            break;
                         }
-                    }
-                    catch (System.Exception ex)
-                    {
-                        doc.Editor.WriteMessage("Error encountered: " + ex.Message);
-                        trans.Abort();
+                        else
+                        {
+                            doc.Editor.WriteMessage("\nLayer not found.");
+                        }
                     }
                 }
             }
+            oExcel.Workbooks.Close();
         }
 
-        [CommandMethod("CAN")]
+        [CommandMethod("Canning_Blocks_True")]
+        public void Canning_Blocks_True()
+        {
+            MainForm mf = new MainForm();
+            mf.Show();
+        }
         public void CAN(string num, string discipline, PromptPointResult ppr, string pathFile)
         {
             string miniDiscipline;
@@ -240,13 +180,6 @@ namespace Macro
                     }
                 }
             }
-        }
-
-        [CommandMethod("Canning_Blocks_True")]
-        public void Canning_Blocks_True()
-        {
-            MainForm mf = new MainForm();
-            mf.Show();
         }
     }
 
