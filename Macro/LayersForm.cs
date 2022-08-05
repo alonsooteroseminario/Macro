@@ -12,13 +12,13 @@ namespace Macro
         {
             InitializeComponent();
         }
-        private void button3_Click(object sender, EventArgs e)
+        private void Button3_Click(object sender, EventArgs e)
         {
             doc = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument;
             MyCommands myCommands = new MyCommands();
             myCommands.LAYERS(pathGeneral, doc);
         }
-        private void btnBrowseFile_Click(object sender, EventArgs e)
+        private void BtnBrowseFile_Click(object sender, EventArgs e)
         {
             using (var fbd = new OpenFileDialog())
             {
@@ -38,7 +38,7 @@ namespace Macro
             pathGeneral = pathFile;
             textBox2.Text = pathFile;
         }
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             Close();
         }

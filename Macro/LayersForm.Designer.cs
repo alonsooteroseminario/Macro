@@ -46,7 +46,7 @@
             this.btnBrowseFile.TabIndex = 24;
             this.btnBrowseFile.Text = "Browse...";
             this.btnBrowseFile.UseVisualStyleBackColor = true;
-            this.btnBrowseFile.Click += new System.EventHandler(this.btnBrowseFile_Click);
+            this.btnBrowseFile.Click += new System.EventHandler(this.BtnBrowseFile_Click);
             // 
             // button2
             // 
@@ -57,7 +57,7 @@
             this.button2.TabIndex = 22;
             this.button2.Text = "CANCEL";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // button3
             // 
@@ -68,7 +68,7 @@
             this.button3.TabIndex = 21;
             this.button3.Text = "TURN OFF";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // textBox2
             // 

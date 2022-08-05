@@ -6,7 +6,10 @@ using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Geometry;
 using Autodesk.AutoCAD.Runtime;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
+using Application = Autodesk.AutoCAD.ApplicationServices.Application;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Macro
@@ -181,6 +184,179 @@ namespace Macro
                 }
             }
         }
+
+        [CommandMethod("Cast_Iron_Fittings")]
+        public static void Cast_Iron_Fittings()
+        {
+            StandardForm Sform = new StandardForm();
+            Sform.Show();
+        }
+        public void CASTFITTINGS(string pathFile, PromptPointResult ppr, string letter)
+        {
+            FileInfo[] Files = new DirectoryInfo(pathFile).GetFiles("*.dwg");
+            int n = 0;
+            foreach (FileInfo file in Files)
+            {
+                n++;
+                if (letter == Path.GetFileName(file.FullName))
+                {
+                    var fileName = Path.GetFileName(file.FullName);
+                    string dwgFlpath = pathFile + fileName;
+                    Document docCurrent = Application.DocumentManager.MdiActiveDocument;
+                    Database dbCurrent = docCurrent.Database;
+                    Editor ed = docCurrent.Editor;
+                    using (Database dbSource = new Database(false, true))
+                    {
+                        dbSource.ReadDwgFile(dwgFlpath, FileOpenMode.OpenForReadAndAllShare, false, null);
+                        IdMapping mapping = new IdMapping();
+                        using (Transaction tr = dbSource.TransactionManager.StartTransaction())
+                        {
+                            docCurrent.LockDocument();
+                            ObjectId sourceMsId = SymbolUtilityServices.GetBlockModelSpaceId(dbSource);
+                            ObjectId destDbMsId = SymbolUtilityServices.GetBlockModelSpaceId(dbCurrent);
+                            ObjectIdCollection sourceIds = new ObjectIdCollection();
+                            BlockTable bt = tr.GetObject(dbSource.BlockTableId, OpenMode.ForRead) as BlockTable;
+                            BlockTableRecord btr = tr.GetObject(bt[BlockTableRecord.ModelSpace], OpenMode.ForRead) as BlockTableRecord;
+                            foreach (ObjectId id in btr)
+                            {
+                                sourceIds.Add(id);
+                            }
+                            dbSource.WblockCloneObjects(sourceIds, destDbMsId, mapping, DuplicateRecordCloning.Replace, false);
+                            tr.Commit();
+                        }
+                        using (Transaction tr2 = dbCurrent.TransactionManager.StartTransaction())
+                        {
+                            docCurrent.LockDocument();
+                            Point3d pt1 = ppr.Value;
+                            BlockTable btCurrent = tr2.GetObject(dbCurrent.BlockTableId, OpenMode.ForRead) as BlockTable;
+                            BlockTableRecord btrCurrent = tr2.GetObject(btCurrent[BlockTableRecord.ModelSpace], OpenMode.ForRead) as BlockTableRecord;
+                            BlockTableRecordEnumerator iter = btrCurrent.GetEnumerator();
+                            ObjectId lastObjId = new ObjectId();
+                            while (iter.MoveNext())
+                            {
+                                lastObjId = iter.Current;
+                            }
+                            BlockReference blk = tr2.GetObject(lastObjId, OpenMode.ForWrite) as BlockReference;
+                            blk.Position = pt1;
+                            tr2.Commit();
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
+        [CommandMethod("Demo")]
+        public void Demo()
+        {
+            OpenFileDialog ofd = new OpenFileDialog
+            {
+                DefaultExt = "*.dwg"
+            };
+            var dr = ofd.ShowDialog();
+
+            if (dr != DialogResult.OK) return;
+            _ = dr.ToString();
+            _ = new ObjectIdCollection();
+            using (Database OuterDB = new Database())
+            {
+                OuterDB.ReadDwgFile(ofd.FileName, System.IO.FileShare.Read, false, "");
+                using (Transaction tr = OuterDB.TransactionManager.StartTransaction())
+                {
+                    BlockTable bt;
+                    bt = (BlockTable)tr.GetObject(OuterDB.BlockTableId
+                                                   , OpenMode.ForRead);
+
+                    BlockTableRecord blk = (BlockTableRecord)tr.GetObject(bt["*Model_Space"], OpenMode.ForRead);
+
+                    var imgsrc = Autodesk.AutoCAD.Windows.Data.CMLContentSearchPreviews.GetBlockTRThumbnail(blk);
+                    var bmp = ImageSourceToGDI(imgsrc as System.Windows.Media.Imaging.BitmapSource);
+
+                    var image = new Form1(bmp as System.Drawing.Bitmap);
+                    image.ShowDialog();
+
+                    tr.Commit();
+                }
+            }
+        }
+
+        [CommandMethod("GetOuterDWGModelBitmap")]
+        public static void GetOuterDWGModelBitmap()
+        {
+            OpenFileDialog ofd = new OpenFileDialog
+            {
+                DefaultExt = "*.dwg"
+            };
+            var dr = ofd.ShowDialog();
+
+            if (dr != DialogResult.OK) return;
+            _ = dr.ToString();
+            _ = new ObjectIdCollection();
+            using (Database OuterDB = new Database())
+            {
+                OuterDB.ReadDwgFile(ofd.FileName, System.IO.FileShare.Read, false, "");
+                using (Transaction tr = OuterDB.TransactionManager.StartTransaction())
+                {
+                    BlockTable bt;
+                    bt = (BlockTable)tr.GetObject(OuterDB.BlockTableId
+                                                   , OpenMode.ForRead);
+
+                    BlockTableRecord blk = (BlockTableRecord)tr.GetObject(bt["*Model_Space"], OpenMode.ForRead);
+
+                    var imgsrc = Autodesk.AutoCAD.Windows.Data.CMLContentSearchPreviews.GetBlockTRThumbnail(blk);
+                    var bmp = ImageSourceToGDI(imgsrc as System.Windows.Media.Imaging.BitmapSource);
+
+                    var image = new ImageForm(bmp as System.Drawing.Bitmap);
+                    image.ShowDialog();
+
+                    tr.Commit();
+                }
+            }
+        }
+        private static System.Drawing.Image ImageSourceToGDI(System.Windows.Media.Imaging.BitmapSource src)
+        {
+            var ms = new MemoryStream();
+            var encoder =
+              new System.Windows.Media.Imaging.BmpBitmapEncoder();
+            encoder.Frames.Add(
+              System.Windows.Media.Imaging.BitmapFrame.Create(src)
+            );
+            encoder.Save(ms);
+            ms.Flush();
+            return System.Drawing.Image.FromStream(ms);
+        }
+        private class ImageForm : Form
+        {
+            public ImageForm(Bitmap ToShow)
+            {
+                this.Height = 800;
+                this.Width = 800;
+                var pictureBox1 = new PictureBox()
+                {
+                    Location = new System.Drawing.Point(10, 10),
+                    Height = 700,
+                    Width = 780
+                };
+                var buttonOK = new Button()
+                {
+                    Text = "Ok",
+                    DialogResult = DialogResult.OK,
+                    Width = 30,
+                    Location = new System.Drawing.Point(730, 730)
+                };
+                this.Controls.Add(pictureBox1);
+                this.Controls.Add(buttonOK);
+
+                pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+                pictureBox1.BackgroundImage = ToShow;
+            }
+        }
+
     }
 
 }
