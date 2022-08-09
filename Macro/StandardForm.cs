@@ -177,6 +177,25 @@ namespace Macro
                 checkBox13.Checked = false;
             }
         }
+        private void CheckBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox cBox = checkBox3;
+            if (cBox.Checked == true)
+            {
+                checkBox1.Checked = false;
+                checkBox2.Checked = false;
+                checkBox4.Checked = false;
+                checkBox5.Checked = false;
+                checkBox6.Checked = false;
+                checkBox7.Checked = false;
+                checkBox8.Checked = false;
+                checkBox9.Checked = false;
+                checkBox10.Checked = false;
+                checkBox11.Checked = false;
+                checkBox12.Checked = false;
+                checkBox13.Checked = false;
+            }
+        }
         private void CheckBox5_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox cBox = checkBox5;
@@ -376,6 +395,7 @@ namespace Macro
                 checkBox19.Checked = false;
                 checkBox23.Checked = false;
                 checkBox24.Checked = false;
+                ChangeCheckBoxList();
             }
         }
         private void CheckBox15_CheckedChanged(object sender, EventArgs e)
@@ -387,6 +407,7 @@ namespace Macro
                 checkBox19.Checked = false;
                 checkBox23.Checked = false;
                 checkBox24.Checked = false;
+                ChangeCheckBoxList();
             }
         }
         private void CheckBox19_CheckedChanged(object sender, EventArgs e)
@@ -398,6 +419,7 @@ namespace Macro
                 checkBox15.Checked = false;
                 checkBox23.Checked = false;
                 checkBox24.Checked = false;
+                ChangeCheckBoxList();
             }
         }
         private void CheckBox23_CheckedChanged(object sender, EventArgs e)
@@ -409,6 +431,7 @@ namespace Macro
                 checkBox15.Checked = false;
                 checkBox19.Checked = false;
                 checkBox24.Checked = false;
+                ChangeCheckBoxList();
             }
         }
         private void CheckBox24_CheckedChanged(object sender, EventArgs e)
@@ -420,69 +443,109 @@ namespace Macro
                 checkBox15.Checked = false;
                 checkBox19.Checked = false;
                 checkBox23.Checked = false;
-            }
-        }
-        private void BtnBrowseFolder_Click(object sender, EventArgs e)
-        {
-            using (var fbd = new FolderBrowserDialog())
-            {
-                DialogResult result = fbd.ShowDialog();
-                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
-                {
-                    pathGeneral = fbd.SelectedPath;
-                    textBox1.Text = fbd.SelectedPath;
-                }
+                ChangeCheckBoxList();
             }
         }
 
+        public string VerifyCheckBoxList()
+        {
+            string a = "";
+            string b = "";
+            if (checkBox4.Checked == true)
+            {
+                a = "22.5";
+            }
+            if (checkBox3.Checked == true)
+            {
+                a = "45";
+            }
+            if (checkBox2.Checked == true)
+            {
+                a = "90";
+            }
+            if (checkBox5.Checked == true)
+            {
+                a = "BOSTON";
+            }
+            if (checkBox1.Checked == true)
+            {
+                a = "TEE-WYE";
+            }
+            if (checkBox6.Checked == true)
+            {
+                a = "WYE";
+            }
+            if (checkBox7.Checked == true)
+            {
+                a = "P-TRAP";
+            }
+            if (checkBox8.Checked == true)
+            {
+                a = "Laundry";
+            }
+            if (checkBox9.Checked == true)
+            {
+                a = "OFFSETS";
+            }
+            if (checkBox10.Checked == true)
+            {
+                a = "REDUCER";
+            }
+            if (checkBox11.Checked == true)
+            {
+                a = "Kitchen Sink";
+            }
+            if (checkBox12.Checked == true)
+            {
+                a = "BTG";
+            }
+            if (checkBox13.Checked == true)
+            {
+                a = "BV_VS";
+            }
+
+            if (checkBox18.Checked == true)
+            {
+                b = "2";
+            }
+            if (checkBox15.Checked == true)
+            {
+                b = "3";
+            }
+            if (checkBox19.Checked == true)
+            {
+                b = "4";
+            }
+            if (checkBox23.Checked == true)
+            {
+                b = "6";
+            }
+            if (checkBox24.Checked == true)
+            {
+                b = "8";
+            }
+
+            string AB = a + "\\" + b;
+
+            return AB;
+        }
         public void ChangeCheckBoxList()
         {
             try
             {
-                string a = "";
-                string b = "";
-                if (checkBox4.Checked == true)
-                {
-                    a = "22.5";
-                }
-                if (checkBox3.Checked == true)
-                {
-                    a = "45";
-                }
-                if (checkBox18.Checked == true)
-                {
-                    b = "2";
-                }
-                if (checkBox15.Checked == true)
-                {
-                    b = "3";
-                }
-                if (checkBox19.Checked == true)
-                {
-                    b = "4";
-                }
-                if (checkBox23.Checked == true)
-                {
-                    b = "6";
-                }
-                if (checkBox24.Checked == true)
-                {
-                    b = "8";
-                }
+                var AB = VerifyCheckBoxList();
 
-                var fileNames = Directory.GetFiles("C:\\Users\\" +
+                var path = "C:\\Users\\" +
                     Environment.UserName +
-                    "\\Box\\" + "PM Resources\\Layout Team 2022\\Repos Macros\\FamiliesFiles\\" + "CAST IRON FITTINGS\\" +
-                    a +
-                    "\\" +
-                    b);
+                    "\\Box\\" + "PM Resources\\Layout Team 2022\\Repos Macros\\FamiliesFiles\\" + "CAST IRON FITTINGS\\";
 
+                var fileNames = Directory.GetFiles(path + AB);
 
                 checkedListBox1.Items.Clear();
                 foreach (var fileName in fileNames)
                 {
-                    //char fileNameToShow = fileName[fileName.Length-5];
-                    checkedListBox1.Items.Add(fileName); // Full path
+                    string[] splited = fileName.Split('\\');
+                    checkedListBox1.Items.Add(splited.Last()); // Full path
                 }
             }
             catch (Exception ex)
@@ -494,6 +557,15 @@ namespace Macro
         private void CheckedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             string itemText = checkedListBox1.Items[e.Index].ToString();
+            
+            var AB = VerifyCheckBoxList();
+            
+            var path = "C:\\Users\\" +
+                Environment.UserName +
+                "\\Box\\" + "PM Resources\\Layout Team 2022\\Repos Macros\\FamiliesFiles\\" + "CAST IRON FITTINGS\\";
+
+            var totalFilePath = path + AB + "\\" + itemText;
+
 
             for (int ix = 0; ix < checkedListBox1.Items.Count; ++ix)
             {
@@ -505,7 +577,7 @@ namespace Macro
                 _ = new ObjectIdCollection();
                 using (Database OuterDB = new Database())
                 {
-                    OuterDB.ReadDwgFile(itemText, System.IO.FileShare.Read, false, "");
+                    OuterDB.ReadDwgFile(totalFilePath, System.IO.FileShare.Read, false, "");
                     using (Transaction tr = OuterDB.TransactionManager.StartTransaction())
                     {
                         BlockTable bt;
@@ -540,17 +612,6 @@ namespace Macro
             encoder.Save(ms);
             ms.Flush();
             return System.Drawing.Image.FromStream(ms);
-        }
-
-        private void Button3_Click(object sender, EventArgs e)
-        {
-            ChangeCheckBoxList();
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is StandardForm form &&
-                   pathGeneral == form.pathGeneral;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Macro
 {
     public class MyCommands
     {
-        [CommandMethod("Layers_Turns_Off_True")]
+        [CommandMethod("True_Layers_Turns_Off")]
         public static void Layers_Turns_Off_True()
         {
             LayersForm lf = new LayersForm();
@@ -67,7 +67,7 @@ namespace Macro
             oExcel.Workbooks.Close();
         }
 
-        [CommandMethod("Canning_Blocks_True")]
+        [CommandMethod("True_Canning_Blocks")]
         public void Canning_Blocks_True()
         {
             MainForm mf = new MainForm();
@@ -185,7 +185,7 @@ namespace Macro
             }
         }
 
-        [CommandMethod("Cast_Iron_Fittings")]
+        [CommandMethod("True_Cast_Iron_Fittings")]
         public static void Cast_Iron_Fittings()
         {
             StandardForm Sform = new StandardForm();
@@ -244,12 +244,6 @@ namespace Macro
                 }
             }
         }
-
-
-
-
-
-
 
         [CommandMethod("Demo")]
         public void Demo()
@@ -356,7 +350,5 @@ namespace Macro
                 pictureBox1.BackgroundImage = ToShow;
             }
         }
-
     }
-
 }

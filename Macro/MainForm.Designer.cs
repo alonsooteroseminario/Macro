@@ -57,8 +57,6 @@
             this.checkBox17 = new System.Windows.Forms.CheckBox();
             this.checkBox15 = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btnBrowseFolder = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -68,7 +66,7 @@
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(12, 435);
+            this.button1.Location = new System.Drawing.Point(12, 407);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(194, 49);
             this.button1.TabIndex = 0;
@@ -79,7 +77,7 @@
             // button2
             // 
             this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.Location = new System.Drawing.Point(212, 435);
+            this.button2.Location = new System.Drawing.Point(212, 407);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(74, 49);
             this.button2.TabIndex = 1;
@@ -393,27 +391,10 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Size";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(12, 407);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(194, 22);
-            this.textBox1.TabIndex = 18;
-            // 
-            // btnBrowseFolder
-            // 
-            this.btnBrowseFolder.Location = new System.Drawing.Point(212, 405);
-            this.btnBrowseFolder.Name = "btnBrowseFolder";
-            this.btnBrowseFolder.Size = new System.Drawing.Size(74, 24);
-            this.btnBrowseFolder.TabIndex = 19;
-            this.btnBrowseFolder.Text = "Browse...";
-            this.btnBrowseFolder.UseVisualStyleBackColor = true;
-            this.btnBrowseFolder.Click += new System.EventHandler(this.BtnBrowseFolder_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(12, 490);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 462);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(274, 61);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -428,10 +409,8 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.CancelButton = this.button2;
-            this.ClientSize = new System.Drawing.Size(298, 563);
+            this.ClientSize = new System.Drawing.Size(298, 531);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.btnBrowseFolder);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button2);
@@ -442,15 +421,12 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Canning Blocks";
             this.TopMost = true;
-            this.Activated += new System.EventHandler(this.MainForm_Activated);
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -484,8 +460,6 @@
         private System.Windows.Forms.CheckBox checkBox17;
         private System.Windows.Forms.CheckBox checkBox15;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button btnBrowseFolder;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

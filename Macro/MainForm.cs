@@ -9,7 +9,7 @@ namespace Macro
         private string num;
         private string discipline;
         private bool res;
-        private string pathGeneral;
+        private readonly string pathGeneral;
         public MainForm()
         {
             InitializeComponent();
@@ -581,31 +581,6 @@ namespace Macro
                 checkBox22.Checked = false;
                 checkBox16.Checked = false;
             }
-        }
-        private void BtnBrowseFolder_Click(object sender, EventArgs e)
-        {
-            using (var fbd = new FolderBrowserDialog())
-            {
-                DialogResult result = fbd.ShowDialog();
-                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
-                {
-                    pathGeneral = fbd.SelectedPath;
-                    textBox1.Text = fbd.SelectedPath;
-                }
-            }
-        }
-        private void MainForm_Activated(object sender, EventArgs e)
-        {
-            string pathFile = @"C:\Users\"
-                            + Environment.UserName
-                            + @"\Box\PM Resources\Layout Team 2022\Repos Macros\FamiliesFiles\CANNING BLOCKS\";
-            pathGeneral = pathFile;
-            textBox1.Text = pathFile;
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

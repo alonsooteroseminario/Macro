@@ -50,15 +50,12 @@
             this.checkBox18 = new System.Windows.Forms.CheckBox();
             this.checkBox19 = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnBrowseFolder = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -156,6 +153,7 @@
             this.checkBox3.TabIndex = 4;
             this.checkBox3.Text = "45";
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.CheckBox3_CheckedChanged);
             // 
             // checkBox11
             // 
@@ -243,7 +241,7 @@
             this.groupBox2.Controls.Add(this.checkBox19);
             this.groupBox2.Location = new System.Drawing.Point(144, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(142, 308);
+            this.groupBox2.Size = new System.Drawing.Size(83, 370);
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Size";
@@ -306,35 +304,19 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(12, 471);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 443);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(274, 61);
+            this.pictureBox1.Size = new System.Drawing.Size(215, 61);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 25;
             this.pictureBox1.TabStop = false;
             // 
-            // btnBrowseFolder
-            // 
-            this.btnBrowseFolder.Location = new System.Drawing.Point(212, 386);
-            this.btnBrowseFolder.Name = "btnBrowseFolder";
-            this.btnBrowseFolder.Size = new System.Drawing.Size(74, 24);
-            this.btnBrowseFolder.TabIndex = 24;
-            this.btnBrowseFolder.Text = "Browse...";
-            this.btnBrowseFolder.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(12, 388);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(194, 22);
-            this.textBox1.TabIndex = 23;
-            // 
             // button2
             // 
             this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.Location = new System.Drawing.Point(212, 416);
+            this.button2.Location = new System.Drawing.Point(144, 388);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(74, 49);
+            this.button2.Size = new System.Drawing.Size(83, 49);
             this.button2.TabIndex = 22;
             this.button2.Text = "CANCEL";
             this.button2.UseVisualStyleBackColor = true;
@@ -342,9 +324,9 @@
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(12, 416);
+            this.button1.Location = new System.Drawing.Point(12, 388);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(194, 49);
+            this.button1.Size = new System.Drawing.Size(126, 49);
             this.button1.TabIndex = 21;
             this.button1.Text = "OK";
             this.button1.UseVisualStyleBackColor = true;
@@ -353,12 +335,12 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.splitContainer1);
-            this.groupBox3.Location = new System.Drawing.Point(292, 12);
+            this.groupBox3.Location = new System.Drawing.Point(233, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(314, 520);
+            this.groupBox3.Size = new System.Drawing.Size(423, 492);
             this.groupBox3.TabIndex = 26;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Views";
+            this.groupBox3.Text = "Blocks";
             // 
             // splitContainer1
             // 
@@ -374,17 +356,18 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(308, 499);
-            this.splitContainer1.SplitterDistance = 212;
+            this.splitContainer1.Size = new System.Drawing.Size(417, 471);
+            this.splitContainer1.SplitterDistance = 200;
             this.splitContainer1.TabIndex = 3;
             // 
             // checkedListBox1
             // 
             this.checkedListBox1.CheckOnClick = true;
+            this.checkedListBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(6, -1);
+            this.checkedListBox1.Location = new System.Drawing.Point(0, 0);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(302, 208);
+            this.checkedListBox1.Size = new System.Drawing.Size(417, 200);
             this.checkedListBox1.TabIndex = 2;
             this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CheckedListBox1_ItemCheck);
             // 
@@ -393,19 +376,9 @@
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(308, 283);
+            this.pictureBox2.Size = new System.Drawing.Size(417, 267);
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(144, 326);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(142, 56);
-            this.button3.TabIndex = 27;
-            this.button3.Text = "Load Views";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // StandardForm
             // 
@@ -414,12 +387,9 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.CancelButton = this.button2;
-            this.ClientSize = new System.Drawing.Size(618, 539);
-            this.Controls.Add(this.button3);
+            this.ClientSize = new System.Drawing.Size(662, 511);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.btnBrowseFolder);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);
@@ -441,7 +411,6 @@
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -468,14 +437,11 @@
         private System.Windows.Forms.CheckBox checkBox18;
         private System.Windows.Forms.CheckBox checkBox19;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btnBrowseFolder;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Button button3;
     }
 }
