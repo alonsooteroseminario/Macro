@@ -16,6 +16,12 @@ namespace Macro
 {
     public class MyCommands
     {
+        [CommandMethod("True_BlockForm")]
+        public void True_BlockForm()
+        {
+            GeneralForm gf = new GeneralForm();
+            gf.Show();
+        }
         [CommandMethod("True_Layers_Turns_Off")]
         public static void Layers_Turns_Off_True()
         {
@@ -67,7 +73,7 @@ namespace Macro
             oExcel.Workbooks.Close();
         }
 
-        [CommandMethod("True_Canning_Blocks")]
+        //[CommandMethod("True_Canning_Blocks")]
         public void Canning_Blocks_True()
         {
             MainForm mf = new MainForm();
@@ -185,7 +191,7 @@ namespace Macro
             }
         }
 
-        [CommandMethod("True_Cast_Iron_Fittings")]
+        //[CommandMethod("True_Cast_Iron_Fittings")]
         public static void Cast_Iron_Fittings()
         {
             StandardForm Sform = new StandardForm();
@@ -245,7 +251,7 @@ namespace Macro
             }
         }
 
-        [CommandMethod("Demo")]
+        //[CommandMethod("Demo")]
         public void Demo()
         {
             OpenFileDialog ofd = new OpenFileDialog
@@ -279,7 +285,7 @@ namespace Macro
             }
         }
 
-        [CommandMethod("GetOuterDWGModelBitmap")]
+        //[CommandMethod("GetOuterDWGModelBitmap")]
         public static void GetOuterDWGModelBitmap()
         {
             OpenFileDialog ofd = new OpenFileDialog

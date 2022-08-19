@@ -12,7 +12,9 @@ namespace Macro
         private string num;
         private string type;
         private bool res;
-        private string pathGeneral;
+        private string pathGeneral = "C:\\Users\\" +
+                    Environment.UserName +
+                    "\\Box\\" + "PM Resources\\Layout Team 2022\\Repos Macros\\FamiliesFiles\\" + "CAST IRON FITTINGS\\";
 
         public StandardForm(string pathGeneral)
         {
@@ -503,7 +505,6 @@ namespace Macro
             {
                 a = "BV_VS";
             }
-
             if (checkBox18.Checked == true)
             {
                 b = "2";
@@ -535,9 +536,7 @@ namespace Macro
             {
                 var AB = VerifyCheckBoxList();
 
-                var path = "C:\\Users\\" +
-                    Environment.UserName +
-                    "\\Box\\" + "PM Resources\\Layout Team 2022\\Repos Macros\\FamiliesFiles\\" + "CAST IRON FITTINGS\\";
+                var path = pathGeneral;
 
                 var fileNames = Directory.GetFiles(path + AB);
 
@@ -558,11 +557,9 @@ namespace Macro
         {
             string itemText = checkedListBox1.Items[e.Index].ToString();
             
-            var AB = VerifyCheckBoxList();
-            
-            var path = "C:\\Users\\" +
-                Environment.UserName +
-                "\\Box\\" + "PM Resources\\Layout Team 2022\\Repos Macros\\FamiliesFiles\\" + "CAST IRON FITTINGS\\";
+            var AB = VerifyCheckBoxList(); // 22.5 + "\\" + 6;
+
+            var path = pathGeneral;
 
             var totalFilePath = path + AB + "\\" + itemText;
 

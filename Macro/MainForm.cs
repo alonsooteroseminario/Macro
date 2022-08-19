@@ -9,7 +9,9 @@ namespace Macro
         private string num;
         private string discipline;
         private bool res;
-        private readonly string pathGeneral;
+        private readonly string pathGeneral = @"C:\\Users\\" +
+                        Environment.UserName +
+                        @"\\Box\\PM Resources\\Layout Team 2022\\Repos Macros\\FamiliesFiles\\CANNING BLOCKS\\";
         public MainForm()
         {
             InitializeComponent();
