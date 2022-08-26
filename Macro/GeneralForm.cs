@@ -11,8 +11,8 @@ namespace Macro
     public partial class GeneralForm : Form
     {
         private string pathGeneral = @"C:\Users\"
-                            + Environment.UserName
-                            + @"\Box\PM Resources\Layout Team 2022\Repos Macros\FamiliesFiles\CAST IRON FITTINGS\";
+                + Environment.UserName
+                + @"\Box\PM Resources\Layout Team 2022\Repos Macros\FamiliesFiles\";
         readonly int n = 26;
         private bool res;
         readonly int n2 = 26;
@@ -61,7 +61,7 @@ namespace Macro
                         }
                     }
 
-                    string pathFile = pathGeneral + @"\" + type + @"\" + num + @"\";
+                    string pathFile = pathGeneral + comboBox1.SelectedItem.ToString() + @"\" + type + @"\" + num + @"\";
 
                     for (int i = 0; i < checkedListBox1.Items.Count; i++)
                     {
@@ -82,7 +82,7 @@ namespace Macro
             this.groupBox1.Controls.Clear();
             int m = 0;
 
-            var subFolders = Directory.GetDirectories(pathGeneral);
+            var subFolders = Directory.GetDirectories(pathGeneral + comboBox1.SelectedItem.ToString());
 
             foreach (var subFolder in subFolders)
             {
@@ -103,6 +103,46 @@ namespace Macro
             {
                 checkBox.CheckedChanged += new System.EventHandler(Custom_event_handler);
             }
+        }
+        public void GetFoldersSize()
+        {
+            this.groupBox2.Controls.Clear();
+            int m2 = 0;
+
+            var subFolders = Directory.GetDirectories(pathGeneral + comboBox1.SelectedItem.ToString());
+            var firstSubFolder = subFolders.First();
+
+            string[] splited_0 = firstSubFolder.Split('\\');
+            string sizePath = pathGeneral + comboBox1.SelectedItem.ToString() + "\\" + splited_0.Last().ToString();
+            var subFoldersSize = Directory.GetDirectories(sizePath);
+
+            foreach (var subFolder in subFoldersSize)
+            {
+                System.Windows.Forms.CheckBox chBx = new System.Windows.Forms.CheckBox();
+                this.groupBox2.Controls.Add(chBx);
+                chBx.AutoSize = true;
+                chBx.Location = new System.Drawing.Point(6, 23 + n2 * m2);
+                chBx.Size = new System.Drawing.Size(42, 20);
+                chBx.UseVisualStyleBackColor = true;
+                chBx.Name = "checkBox" + (m2 + 14).ToString();
+                list_CheckBoxesSize.Add(chBx);
+                m2++;
+                string[] splited = subFolder.Split('\\');
+                chBx.Text = splited.Last();
+            }
+            foreach (var checkBox in list_CheckBoxesSize)
+            {
+                checkBox.CheckedChanged += new System.EventHandler(Custom_event_handlerSize);
+            }
+        }
+
+        public void GetFoldersTypeCleanUp()
+        {
+            this.groupBox1.Controls.Clear();
+        }
+        public void GetFoldersSizeCleanUp()
+        {
+            this.groupBox2.Controls.Clear();
         }
         private void Custom_event_handler(object sender, EventArgs e)
         {
@@ -138,9 +178,7 @@ namespace Macro
                     b = item.Text;
                 }
             }
-
-            string AB = "\\" + a + "\\" + b;
-            return AB;
+            return "\\" + a + "\\" + b;
         }
         public void ChangeCheckBoxList()
         {
@@ -148,7 +186,7 @@ namespace Macro
             {
                 var AB = VerifyCheckBoxList();
 
-                var path = pathGeneral;
+                var path = pathGeneral + comboBox1.SelectedItem.ToString();
 
                 var fileNames = Directory.GetFiles(path + AB);
 
@@ -162,37 +200,6 @@ namespace Macro
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-            }
-        }
-        public void GetFoldersSize()
-        {
-            this.groupBox2.Controls.Clear();
-            int m2 = 0;
-
-            var subFolders = Directory.GetDirectories(pathGeneral);
-            var firstSubFolder = subFolders.First();
-
-            string[] splited_0 = firstSubFolder.Split('\\');
-            string sizePath = pathGeneral + "\\" + splited_0.Last().ToString();
-            var subFoldersSize = Directory.GetDirectories(sizePath);
-
-            foreach (var subFolder in subFoldersSize)
-            {
-                System.Windows.Forms.CheckBox chBx = new System.Windows.Forms.CheckBox();
-                this.groupBox2.Controls.Add(chBx);
-                chBx.AutoSize = true;
-                chBx.Location = new System.Drawing.Point(6, 23 + n2 * m2);
-                chBx.Size = new System.Drawing.Size(42, 20);
-                chBx.UseVisualStyleBackColor = true;
-                chBx.Name = "checkBox" + (m2 + 14).ToString();
-                list_CheckBoxesSize.Add(chBx);
-                m2++;
-                string[] splited = subFolder.Split('\\');
-                chBx.Text = splited.Last();
-            }
-            foreach (var checkBox in list_CheckBoxesSize)
-            {
-                checkBox.CheckedChanged += new System.EventHandler(Custom_event_handlerSize);
             }
         }
         private void Custom_event_handlerSize(object sender, EventArgs e)
@@ -216,12 +223,17 @@ namespace Macro
             {
                 if (fbd.ShowDialog() == DialogResult.OK)
                 {
-                    pathGeneral = fbd.SelectedPath;
-                    textBox2.Text = fbd.SelectedPath;
-                    string[] splited = fbd.SelectedPath.Split('\\');
-                    this.Text = splited.Last();
-                    GetFoldersType();
-                    GetFoldersSize();
+                    pathGeneral = fbd.SelectedPath + @"\";
+
+                    var subFolders = Directory.GetDirectories(fbd.SelectedPath);
+                    comboBox1.Items.Clear();
+                    foreach (var subFolder in subFolders)
+                    {
+                        string[] splited = subFolder.Split('\\');
+                        comboBox1.Items.Add(splited.Last().ToString());
+                    }
+                    GetFoldersTypeCleanUp();
+                    GetFoldersSizeCleanUp();
                 }
             }
         }
@@ -229,18 +241,28 @@ namespace Macro
         {
             if (active)
             {
-                string pathFile = @"C:\Users\"
-                + Environment.UserName
-                + @"\Box\PM Resources\Layout Team 2022\Repos Macros\FamiliesFiles\CAST IRON FITTINGS";
+                //string pathFile = @"C:\Users\"
+                //+ Environment.UserName
+                //+ @"\Box\PM Resources\Layout Team 2022\Repos Macros\FamiliesFiles\CAST IRON FITTINGS";
 
-                string[] splited = pathFile.Split('\\');
-                this.Text = splited.Last();
+                //string[] splited = pathFile.Split('\\');
+                //this.Text = splited.Last();
                 
-                pathGeneral = pathFile;
-                
-                textBox2.Text = pathFile;
-                GetFoldersType();
-                GetFoldersSize();
+
+                string pathFile2 = pathGeneral;
+
+                //pathGeneral = pathFile2 + @"CAST IRON FITTINGS";
+
+                var subFolders = Directory.GetDirectories(pathFile2);
+
+                foreach (var subFolder in subFolders)
+                {
+                    string[] splited2 = subFolder.Split('\\');
+                    comboBox1.Items.Add(splited2.Last().ToString());
+                }
+
+                //GetFoldersType();
+                //GetFoldersSize();
                 active = false;
             }
         }
@@ -254,7 +276,7 @@ namespace Macro
 
             var AB = VerifyCheckBoxList(); // "\\" + 22.5 + "\\" + 6;
 
-            var path = pathGeneral;
+            var path = pathGeneral + comboBox1.SelectedItem.ToString();
 
             var totalFilePath = path + AB + "\\" + itemText;
 
@@ -303,6 +325,17 @@ namespace Macro
             encoder.Save(ms);
             ms.Flush();
             return System.Drawing.Image.FromStream(ms);
+        }
+
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            string pathFile = pathGeneral + comboBox1.SelectedItem.ToString();
+
+            string[] splited = pathFile.Split('\\');
+            this.Text = splited.Last();
+
+            GetFoldersType();
+            GetFoldersSize();
         }
     }
 }

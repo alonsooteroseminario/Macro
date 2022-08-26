@@ -16,7 +16,7 @@ namespace Macro
 {
     public class MyCommands
     {
-        [CommandMethod("True_BlockForm")]
+        [CommandMethod("True_Blocks_Form")]
         public void True_BlockForm()
         {
             GeneralForm gf = new GeneralForm();
@@ -251,38 +251,11 @@ namespace Macro
             }
         }
 
-        //[CommandMethod("Demo")]
+        [CommandMethod("Demo")]
         public void Demo()
         {
-            OpenFileDialog ofd = new OpenFileDialog
-            {
-                DefaultExt = "*.dwg"
-            };
-            var dr = ofd.ShowDialog();
-
-            if (dr != DialogResult.OK) return;
-            _ = dr.ToString();
-            _ = new ObjectIdCollection();
-            using (Database OuterDB = new Database())
-            {
-                OuterDB.ReadDwgFile(ofd.FileName, System.IO.FileShare.Read, false, "");
-                using (Transaction tr = OuterDB.TransactionManager.StartTransaction())
-                {
-                    BlockTable bt;
-                    bt = (BlockTable)tr.GetObject(OuterDB.BlockTableId
-                                                   , OpenMode.ForRead);
-
-                    BlockTableRecord blk = (BlockTableRecord)tr.GetObject(bt["*Model_Space"], OpenMode.ForRead);
-
-                    var imgsrc = Autodesk.AutoCAD.Windows.Data.CMLContentSearchPreviews.GetBlockTRThumbnail(blk);
-                    var bmp = ImageSourceToGDI(imgsrc as System.Windows.Media.Imaging.BitmapSource);
-
-                    var image = new Form1(bmp as System.Drawing.Bitmap);
-                    image.ShowDialog();
-
-                    tr.Commit();
-                }
-            }
+            Form2 gf = new Form2();
+            gf.Show();
         }
 
         //[CommandMethod("GetOuterDWGModelBitmap")]

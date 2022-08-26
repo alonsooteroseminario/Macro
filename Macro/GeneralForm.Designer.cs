@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeneralForm));
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.btnBrowseFile = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -41,6 +40,7 @@
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -50,18 +50,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(9, 470);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(308, 22);
-            this.textBox2.TabIndex = 24;
-            // 
             // btnBrowseFile
             // 
-            this.btnBrowseFile.Location = new System.Drawing.Point(9, 498);
+            this.btnBrowseFile.Location = new System.Drawing.Point(12, 540);
             this.btnBrowseFile.Name = "btnBrowseFile";
-            this.btnBrowseFile.Size = new System.Drawing.Size(308, 24);
+            this.btnBrowseFile.Size = new System.Drawing.Size(305, 41);
             this.btnBrowseFile.TabIndex = 25;
             this.btnBrowseFile.Text = "Browse...";
             this.btnBrowseFile.UseVisualStyleBackColor = true;
@@ -70,9 +63,9 @@
             // button3
             // 
             this.button3.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button3.Location = new System.Drawing.Point(12, 528);
+            this.button3.Location = new System.Drawing.Point(12, 617);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(208, 43);
+            this.button3.Size = new System.Drawing.Size(208, 52);
             this.button3.TabIndex = 26;
             this.button3.Text = "START";
             this.button3.UseVisualStyleBackColor = true;
@@ -81,9 +74,9 @@
             // button2
             // 
             this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.Location = new System.Drawing.Point(226, 528);
+            this.button2.Location = new System.Drawing.Point(226, 617);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(91, 43);
+            this.button2.Size = new System.Drawing.Size(91, 52);
             this.button2.TabIndex = 27;
             this.button2.Text = "CANCEL";
             this.button2.UseVisualStyleBackColor = true;
@@ -92,7 +85,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 449);
+            this.label1.Location = new System.Drawing.Point(12, 521);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(194, 16);
             this.label1.TabIndex = 29;
@@ -102,7 +95,7 @@
             // 
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(222, 434);
+            this.groupBox1.Size = new System.Drawing.Size(222, 506);
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Type";
@@ -111,7 +104,7 @@
             // 
             this.groupBox2.Location = new System.Drawing.Point(240, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(80, 434);
+            this.groupBox2.Size = new System.Drawing.Size(77, 506);
             this.groupBox2.TabIndex = 31;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Size";
@@ -121,7 +114,7 @@
             this.groupBox3.Controls.Add(this.splitContainer1);
             this.groupBox3.Location = new System.Drawing.Point(323, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(498, 629);
+            this.groupBox3.Size = new System.Drawing.Size(498, 727);
             this.groupBox3.TabIndex = 32;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Blocks";
@@ -140,8 +133,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(492, 608);
-            this.splitContainer1.SplitterDistance = 257;
+            this.splitContainer1.Size = new System.Drawing.Size(492, 706);
+            this.splitContainer1.SplitterDistance = 298;
             this.splitContainer1.TabIndex = 3;
             // 
             // checkedListBox1
@@ -151,7 +144,7 @@
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Location = new System.Drawing.Point(0, 0);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(492, 257);
+            this.checkedListBox1.Size = new System.Drawing.Size(492, 298);
             this.checkedListBox1.TabIndex = 2;
             this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CheckedListBox1_ItemCheck);
             // 
@@ -160,35 +153,44 @@
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(492, 347);
+            this.pictureBox2.Size = new System.Drawing.Size(492, 404);
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(9, 577);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 675);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(308, 61);
+            this.pictureBox1.Size = new System.Drawing.Size(305, 61);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 33;
             this.pictureBox1.TabStop = false;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(12, 587);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(305, 24);
+            this.comboBox1.TabIndex = 34;
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
             // 
             // GeneralForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ClientSize = new System.Drawing.Size(831, 653);
+            this.ClientSize = new System.Drawing.Size(831, 751);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnBrowseFile);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.btnBrowseFile);
-            this.Controls.Add(this.textBox2);
             this.Name = "GeneralForm";
             this.Text = "GeneralForm";
             this.Activated += new System.EventHandler(this.GeneralForm_Activated);
@@ -205,8 +207,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button btnBrowseFile;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
@@ -218,5 +218,6 @@
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
