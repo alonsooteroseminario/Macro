@@ -22,13 +22,14 @@ namespace Macro
             GeneralForm gf = new GeneralForm();
             gf.Show();
         }
-        [CommandMethod("True_Layers_Turns_Off")]
-        public static void Layers_Turns_Off_True()
+        
+        [CommandMethod("True_Layers_Turns_Off_On")]
+        public static void True_Layers_Turns_Off_On()
         {
             LayersForm lf = new LayersForm();
             lf.Show();
         }
-        public void LAYERS(string filepath, Document doc)
+        public void LAYERS_Off(string filepath, Document doc)
         {
             Database db = doc.Database;
             List<string> layers = new List<string>();
@@ -72,6 +73,105 @@ namespace Macro
             }
             oExcel.Workbooks.Close();
         }
+        public void LAYERS_On(string filepath, Document doc)
+        {
+            Database db = doc.Database;
+            List<string> layers = new List<string>();
+            Excel.Application oExcel = new Excel.Application();
+            Excel.Workbook WB = oExcel.Workbooks.Open(filepath);
+            string ExcelWorkbookname = WB.Name;
+            int worksheetcount = WB.Worksheets.Count;
+            Excel.Worksheet wks = WB.Worksheets[1];
+            string firstworksheetname = wks.Name;
+            Excel.Range xlRange = wks.UsedRange;
+            foreach (Excel.Range item in xlRange.Rows.Cells)
+            {
+                var address = item.Address;
+                var value = item.Value;
+                layers.Add(value);
+            }
+            var layercount = layers.Count;
+            foreach (var layer in layers)
+            {
+                using (Transaction trans = db.TransactionManager.StartTransaction())
+                {
+                    doc.LockDocument();
+                    LayerTable lyTab = trans.GetObject(db.LayerTableId, OpenMode.ForRead) as LayerTable;
+                    foreach (ObjectId lyID in lyTab)
+                    {
+                        LayerTableRecord lytr = trans.GetObject(lyID, OpenMode.ForRead) as LayerTableRecord;
+                        if (lytr.Name == layer)
+                        {
+                            lytr.UpgradeOpen();
+                            lytr.IsOff = false;
+                            trans.Commit();
+                            doc.Editor.WriteMessage("\nLayer " + lytr.Name + " has been turned On.");
+                            break;
+                        }
+                        else
+                        {
+                            doc.Editor.WriteMessage("\nLayer not found.");
+                        }
+                    }
+                }
+            }
+            oExcel.Workbooks.Close();
+        }
+        public void CAST(string pathFile, PromptPointResult ppr, string letter)
+        {
+            FileInfo[] Files = new DirectoryInfo(pathFile).GetFiles("*.dwg");
+            int n = 0;
+            foreach (FileInfo file in Files)
+            {
+                n++;
+                if (letter == Path.GetFileName(file.FullName))
+                {
+                    var fileName = Path.GetFileName(file.FullName);
+                    string dwgFlpath = pathFile + fileName;
+                    Document docCurrent = Application.DocumentManager.MdiActiveDocument;
+                    Database dbCurrent = docCurrent.Database;
+                    Editor ed = docCurrent.Editor;
+                    using (Database dbSource = new Database(false, true))
+                    {
+                        dbSource.ReadDwgFile(dwgFlpath, FileOpenMode.OpenForReadAndAllShare, false, null);
+                        IdMapping mapping = new IdMapping();
+                        using (Transaction tr = dbSource.TransactionManager.StartTransaction())
+                        {
+                            docCurrent.LockDocument();
+                            ObjectId sourceMsId = SymbolUtilityServices.GetBlockModelSpaceId(dbSource);
+                            ObjectId destDbMsId = SymbolUtilityServices.GetBlockModelSpaceId(dbCurrent);
+                            ObjectIdCollection sourceIds = new ObjectIdCollection();
+                            BlockTable bt = tr.GetObject(dbSource.BlockTableId, OpenMode.ForRead) as BlockTable;
+                            BlockTableRecord btr = tr.GetObject(bt[BlockTableRecord.ModelSpace], OpenMode.ForRead) as BlockTableRecord;
+                            foreach (ObjectId id in btr)
+                            {
+                                sourceIds.Add(id);
+                            }
+                            dbSource.WblockCloneObjects(sourceIds, destDbMsId, mapping, DuplicateRecordCloning.Replace, false);
+                            tr.Commit();
+                        }
+                        using (Transaction tr2 = dbCurrent.TransactionManager.StartTransaction())
+                        {
+                            docCurrent.LockDocument();
+                            Point3d pt1 = ppr.Value;
+                            BlockTable btCurrent = tr2.GetObject(dbCurrent.BlockTableId, OpenMode.ForRead) as BlockTable;
+                            BlockTableRecord btrCurrent = tr2.GetObject(btCurrent[BlockTableRecord.ModelSpace], OpenMode.ForRead) as BlockTableRecord;
+                            BlockTableRecordEnumerator iter = btrCurrent.GetEnumerator();
+                            ObjectId lastObjId = new ObjectId();
+                            while (iter.MoveNext())
+                            {
+                                lastObjId = iter.Current;
+                            }
+                            BlockReference blk = tr2.GetObject(lastObjId, OpenMode.ForWrite) as BlockReference;
+                            blk.Position = pt1;
+                            tr2.Commit();
+                        }
+                    }
+                }
+            }
+        }
+
+
 
         //[CommandMethod("True_Canning_Blocks")]
         public void Canning_Blocks_True()
@@ -197,61 +297,8 @@ namespace Macro
             StandardForm Sform = new StandardForm();
             Sform.Show();
         }
-        public void CASTFITTINGS(string pathFile, PromptPointResult ppr, string letter)
-        {
-            FileInfo[] Files = new DirectoryInfo(pathFile).GetFiles("*.dwg");
-            int n = 0;
-            foreach (FileInfo file in Files)
-            {
-                n++;
-                if (letter == Path.GetFileName(file.FullName))
-                {
-                    var fileName = Path.GetFileName(file.FullName);
-                    string dwgFlpath = pathFile + fileName;
-                    Document docCurrent = Application.DocumentManager.MdiActiveDocument;
-                    Database dbCurrent = docCurrent.Database;
-                    Editor ed = docCurrent.Editor;
-                    using (Database dbSource = new Database(false, true))
-                    {
-                        dbSource.ReadDwgFile(dwgFlpath, FileOpenMode.OpenForReadAndAllShare, false, null);
-                        IdMapping mapping = new IdMapping();
-                        using (Transaction tr = dbSource.TransactionManager.StartTransaction())
-                        {
-                            docCurrent.LockDocument();
-                            ObjectId sourceMsId = SymbolUtilityServices.GetBlockModelSpaceId(dbSource);
-                            ObjectId destDbMsId = SymbolUtilityServices.GetBlockModelSpaceId(dbCurrent);
-                            ObjectIdCollection sourceIds = new ObjectIdCollection();
-                            BlockTable bt = tr.GetObject(dbSource.BlockTableId, OpenMode.ForRead) as BlockTable;
-                            BlockTableRecord btr = tr.GetObject(bt[BlockTableRecord.ModelSpace], OpenMode.ForRead) as BlockTableRecord;
-                            foreach (ObjectId id in btr)
-                            {
-                                sourceIds.Add(id);
-                            }
-                            dbSource.WblockCloneObjects(sourceIds, destDbMsId, mapping, DuplicateRecordCloning.Replace, false);
-                            tr.Commit();
-                        }
-                        using (Transaction tr2 = dbCurrent.TransactionManager.StartTransaction())
-                        {
-                            docCurrent.LockDocument();
-                            Point3d pt1 = ppr.Value;
-                            BlockTable btCurrent = tr2.GetObject(dbCurrent.BlockTableId, OpenMode.ForRead) as BlockTable;
-                            BlockTableRecord btrCurrent = tr2.GetObject(btCurrent[BlockTableRecord.ModelSpace], OpenMode.ForRead) as BlockTableRecord;
-                            BlockTableRecordEnumerator iter = btrCurrent.GetEnumerator();
-                            ObjectId lastObjId = new ObjectId();
-                            while (iter.MoveNext())
-                            {
-                                lastObjId = iter.Current;
-                            }
-                            BlockReference blk = tr2.GetObject(lastObjId, OpenMode.ForWrite) as BlockReference;
-                            blk.Position = pt1;
-                            tr2.Commit();
-                        }
-                    }
-                }
-            }
-        }
 
-        [CommandMethod("Demo")]
+        //[CommandMethod("Demo")]
         public void Demo()
         {
             Form2 gf = new Form2();

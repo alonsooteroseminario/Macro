@@ -12,7 +12,7 @@ namespace Macro
         private string num;
         private string type;
         private bool res;
-        private string pathGeneral = "C:\\Users\\" +
+        private readonly string pathGeneral = "C:\\Users\\" +
                     Environment.UserName +
                     "\\Box\\" + "PM Resources\\Layout Team 2022\\Repos Macros\\FamiliesFiles\\" + "CAST IRON FITTINGS\\";
 
@@ -134,7 +134,7 @@ namespace Macro
                             var spl = checkedListBox1.Items[i].ToString().Split('\\');
                             string letter = spl.Last();
                             MyCommands myCommands = new MyCommands();
-                            myCommands.CASTFITTINGS(pathFile, ppr, letter);
+                            myCommands.CAST(pathFile, ppr, letter);
                         }
                     }
 
@@ -556,7 +556,7 @@ namespace Macro
         private void CheckedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             string itemText = checkedListBox1.Items[e.Index].ToString();
-            
+
             var AB = VerifyCheckBoxList(); // 22.5 + "\\" + 6;
 
             var path = pathGeneral;

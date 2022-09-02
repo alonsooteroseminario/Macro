@@ -1,0 +1,37 @@
+C:\Users\BRACAdmin\source\repos\Macro\Macro\bin\Debug\Macro.dll
+C:\Users\BRACAdmin\source\repos\Macro\Macro\bin\Debug\Macro.pdb
+C:\Users\BRACAdmin\source\repos\Macro\Macro\obj\Debug\Macro.MyCommands.resources
+C:\Users\BRACAdmin\source\repos\Macro\Macro\obj\Debug\Macro.csproj.GenerateResource.cache
+C:\Users\BRACAdmin\source\repos\Macro\Macro\obj\Debug\Macro.csproj.CoreCompileInputs.cache
+C:\Users\BRACAdmin\source\repos\Macro\Macro\obj\Debug\Macro.dll
+C:\Users\BRACAdmin\source\repos\Macro\Macro\obj\Debug\Macro.pdb
+C:\Users\BRACAdmin\Box\PM Resources\Layout Team 2022\Repos Macros\Macro\Macro\bin\Debug\Macro.dll
+C:\Users\BRACAdmin\Box\PM Resources\Layout Team 2022\Repos Macros\Macro\Macro\bin\Debug\Macro.pdb
+C:\Users\BRACAdmin\Box\PM Resources\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.csproj.AssemblyReference.cache
+C:\Users\BRACAdmin\Box\PM Resources\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.Form1.resources
+C:\Users\BRACAdmin\Box\PM Resources\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.Form2.resources
+C:\Users\BRACAdmin\Box\PM Resources\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.GeneralForm.resources
+C:\Users\BRACAdmin\Box\PM Resources\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.LayersForm.resources
+C:\Users\BRACAdmin\Box\PM Resources\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.MainForm.resources
+C:\Users\BRACAdmin\Box\PM Resources\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.MyCommands.resources
+C:\Users\BRACAdmin\Box\PM Resources\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.Properties.Resources.resources
+C:\Users\BRACAdmin\Box\PM Resources\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.StandardForm.resources
+C:\Users\BRACAdmin\Box\PM Resources\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.csproj.GenerateResource.cache
+C:\Users\BRACAdmin\Box\PM Resources\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.csproj.CoreCompileInputs.cache
+C:\Users\BRACAdmin\Box\PM Resources\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.dll
+C:\Users\BRACAdmin\Box\PM Resources\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.pdb
+C:\Users\BRACAdmin\Box\PM Resources\Archives\Layout Team 2022\Repos Macros\Macro\Macro\bin\Debug\Macro.dll
+C:\Users\BRACAdmin\Box\PM Resources\Archives\Layout Team 2022\Repos Macros\Macro\Macro\bin\Debug\Macro.pdb
+C:\Users\BRACAdmin\Box\PM Resources\Archives\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.csproj.AssemblyReference.cache
+C:\Users\BRACAdmin\Box\PM Resources\Archives\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.Form1.resources
+C:\Users\BRACAdmin\Box\PM Resources\Archives\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.Form2.resources
+C:\Users\BRACAdmin\Box\PM Resources\Archives\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.GeneralForm.resources
+C:\Users\BRACAdmin\Box\PM Resources\Archives\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.LayersForm.resources
+C:\Users\BRACAdmin\Box\PM Resources\Archives\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.MainForm.resources
+C:\Users\BRACAdmin\Box\PM Resources\Archives\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.MyCommands.resources
+C:\Users\BRACAdmin\Box\PM Resources\Archives\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.Properties.Resources.resources
+C:\Users\BRACAdmin\Box\PM Resources\Archives\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.StandardForm.resources
+C:\Users\BRACAdmin\Box\PM Resources\Archives\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.csproj.GenerateResource.cache
+C:\Users\BRACAdmin\Box\PM Resources\Archives\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.csproj.CoreCompileInputs.cache
+C:\Users\BRACAdmin\Box\PM Resources\Archives\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.dll
+C:\Users\BRACAdmin\Box\PM Resources\Archives\Layout Team 2022\Repos Macros\Macro\Macro\obj\Debug\Macro.pdb

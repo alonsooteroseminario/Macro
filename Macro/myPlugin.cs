@@ -30,6 +30,7 @@ namespace Macro
             // as well as some of the existing AutoCAD managed apps.
 
             // Initialize your plug-in application here
+            
         }
         void IExtensionApplication.Terminate()
         {

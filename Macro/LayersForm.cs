@@ -16,7 +16,7 @@ namespace Macro
         {
             doc = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument;
             MyCommands myCommands = new MyCommands();
-            myCommands.LAYERS(pathGeneral, doc);
+            myCommands.LAYERS_Off(pathGeneral, doc);
         }
         private void BtnBrowseFile_Click(object sender, EventArgs e)
         {
@@ -33,7 +33,7 @@ namespace Macro
         {
             string pathFile = @"C:\Users\"
                 + Environment.UserName
-                + @"\Box\PM Resources\Layout Team 2022\LAYERS_TO_TURN_OFF.xlsx";
+                + @"\Box\PM Resources\Archives\Layout Team 2022\LAYERS_TO_TURN_OFF.xlsx";
 
             pathGeneral = pathFile;
             textBox2.Text = pathFile;
@@ -41,6 +41,13 @@ namespace Macro
         private void Button2_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            doc = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument;
+            MyCommands myCommands = new MyCommands();
+            myCommands.LAYERS_On(pathGeneral, doc);
         }
     }
 }
